@@ -1,0 +1,13 @@
+val val
+1 inVehTimeEqv
+1 waitingEqv
+1 originWalkEqv
+1 destinationWalkEqv
+1 transferWalkEqv
+1 transferPenalty
+0 scheduleDelayEqv
+0 Fare
+1 VOT
+1 theta
+0 capacity
+0 rail

@@ -1,0 +1,12 @@
+Started assignment at: Tue Dec 26 01:28:46 2023
+
+0 ( 1 )	/	1	passengers assigned;	time elapsed:	0.01	seconds
+32612	/	1	passengers assigned;	time elapsed:	0.01	seconds
+Finished assignment at: Tue Dec 26 01:28:46 2023
+
+Simulation started at:Tue Dec 26 01:28:46 2023
+
+1passengers created
+168 / 168 events simulated ; time elapsed: 0	seconds
+Simulation finished at:Tue Dec 26 01:28:46 2023
+

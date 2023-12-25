@@ -1,0 +1,7 @@
+1 1 iterationFlag
+2 2 pathModelFlag
+1 1 simulationFlag
+1 1 printPassengersFlag
+10 10 pathTimeBuffer
+0 0 transitTrajectoryFlag
+0 0 skimFlag

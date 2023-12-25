@@ -816,6 +816,7 @@ int pathBasedStochasticAssignment(int _iter, int _timeBuff, int _printPassengers
         }
         tmpPDT = passengerPntr->getPDT();
         tmpPAT = passengerPntr->getPAT();
+
         tmpTourHalf = passengerPntr->getTourHalf();
         tmpMode = passengerPntr->getMode();
         tmpPathSet.clear();

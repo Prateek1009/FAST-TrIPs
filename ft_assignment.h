@@ -61,6 +61,7 @@ void readParameters() {
     }
 
     iterationFlag = atoi(tokens[0].c_str());
+    cout << "iterationFlag: " << tokens[0].c_str() << endl;
     if (iterationFlag < 1) {
         cout << "ERROR - # OF ITERATION SHOULD BE A POSITIVE VALUE" << endl;
         exit(1);
@@ -178,7 +179,6 @@ void readRouteChoiceModel() {
     VOT = atof(tokens[8].c_str());
     theta = atof(tokens[9].c_str());
     capacityConstraint = atoi(tokens[10].c_str());
-
     railInVehTimeEqv = atoi(tokens[11].c_str());
 }
 

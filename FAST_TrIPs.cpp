@@ -32,19 +32,19 @@ limitations under the License.
 #include "ft_simulation.h"
 #include "ft_assignment.h"
 
-int	main(){
-	cout <<"****************************** READING INPUTS *****************************"<<endl;
-	readParameters();
-	readRouteChoiceModel();
-	cout <<readStops()<<"\t Stops"<<endl;
-	cout <<readTransfers()<<"\t Transfers"<<endl;
-	cout <<readRoutes()<<"\t Routes"<<endl;
-	cout <<readTrips()<<"\t Trips"<<endl;
-	cout <<readStopTimes()<<"\t Stop Times"<<endl;
-	cout <<defineTransferStops()<<"\t Transfer Stops"<<endl;
-	cout <<readTAZs()<<"\t TAZs"<<endl;
-	cout <<readAccessLinks()<<"\t Access Links"<<endl;
-	cout <<readPassengers()<<"\t Passengers"<<endl;
-	passengerAssignment();
+int main() {
+    cout << "****************************** READING INPUTS *****************************" << endl;
+    readParameters();
+    readRouteChoiceModel();
+    cout << readStops() << "\t Stops" << endl;
+    cout << readTransfers() << "\t Transfers" << endl;
+    cout << readRoutes() << "\t Routes" << endl;
+    cout << readTrips() << "\t Trips" << endl;
+    cout << readStopTimes() << "\t Stop Times" << endl;
+    cout << defineTransferStops() << "\t Transfer Stops" << endl;
+    cout << readTAZs() << "\t TAZs" << endl;
+    cout << readAccessLinks() << "\t Access Links" << endl;
+    cout << readPassengers() << "\t Passengers" << endl;
+    passengerAssignment();
     return 0;
 }

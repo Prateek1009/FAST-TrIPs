@@ -256,7 +256,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
         tmpTripPntr = *tmpTripListIter;
         tmpTripPntr->resetTripUsedBefore(0);
     }
-    stopQueue.empty();
+    stopQueue.empty(); //TODO: Shouldn't this be clear
 
     //Egress to Destination TAZ
     tmpTazPntr = NULL;
@@ -268,7 +268,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
         if (tmpAccessType == 2) continue;
         tmpNewStop = tmpTazPntr->getStop(i);
         tmpAccessTime = tmpTazPntr->getAccessTime(i);
-        tmpNewCost = 1 + destinationWalkEqv * tmpAccessTime;
+        tmpNewCost = destinationWalkEqv * tmpAccessTime;
         tmpNewLabel = tmpNewCost;
         tmpNewDeparture = _PAT - tmpAccessTime;
         stopSet[tmpNewStop]->backwardStrategyUpdate(tmpNewLabel, tmpNewDeparture, "Egress", _destination, tmpNewCost, -101);
@@ -317,6 +317,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
                 if (tmpNewLabel < 0) {
                     cout << "Error - Negative Label - 1" << endl;
                 }
+//                cout << "tmpNewStop: " << tmpNewStop << "       l: " << tmpNewLabel << endl;
                 if (tmpNewLabel < 999 && tmpNewLabel > 0) {
                     tmpNewDeparture = tmpLatestDeparture - tmpTransferTime;
                     stopSet[tmpNewStop]->backwardStrategyUpdate(tmpNewLabel, tmpNewDeparture, "Transfer", tmpCurrentStop, tmpNewCost, -101);
@@ -339,6 +340,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
         }
         for (i = 0; i < tokens.size(); i = i + 2) {
             tmpTrip = tokens[i];
+//            cout << "   Trip" << tmpTrip << endl;
             tmpSeqNum = atoi(tokens[i + 1].c_str());
             tmpTripPntr = tripSet[tmpTrip];
             if (tmpTripPntr->getTripUsedBefore(0) == 1) {
@@ -347,6 +349,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
             for (j = 1; j < tmpSeqNum; j++) {
                 //for(j=max(1,tmpSeqNum-1);j<tmpSeqNum;j++){	//LB
                 tmpNewStop = tmpTripPntr->getStop(j);
+//                cout << "       tmpNewStop: " << tmpNewStop ;
                 tmpNewMode = stopSet[tmpNewStop]->getDepartureTripId(0);
                 if (tmpNewMode == "Egress") {
                     continue;
@@ -359,10 +362,8 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
                     tmpNewCost = tmpCurrentLabel + tmpInVehTime + waitingEqv * tmpWaitingTime + 60.0 * fare / VOT + transferPenalty;
                 } else {
                     tmpNewCost = tmpCurrentLabel + tmpInVehTime + scheduleDelayEqv * tmpWaitingTime + 60.0 * fare / VOT;
+//                    cout << "       labels: " << tmpCurrentLabel <<" " << tmpInVehTime <<" " << scheduleDelayEqv <<" " << tmpWaitingTime  << endl;
                 }
-                /*if ((tmpTripPntr->getRouteId()).length()>3 && (tmpTripPntr->getRouteId()).substr(1,1)=="9"){
-                    tmpNewCost = tmpNewCost + (60.0*1.50)/VOT;
-                }*/
                 tmpOldLabel = stopSet[tmpNewStop]->getStrategyLabel();
                 if (tmpOldLabel == 999999) {
                     tmpNewLabel = tmpNewCost;
@@ -370,6 +371,7 @@ int backwardTBHP(string _destination, double _PAT, int _timeBuffer, int _mode) {
                     tmpNewLabel = exp(-1.0 * theta * tmpOldLabel) + exp(-1.0 * theta * tmpNewCost);
                     tmpNewLabel = max(0.01, -1.0 / theta * log(tmpNewLabel));
                 }
+//                cout << "       l: " << tmpNewLabel << endl;
                 if (tmpNewLabel < 0) {
                     cout << "Error - Negative Label - 2" << endl;
                 }
@@ -638,8 +640,6 @@ string getBackwardElementaryPath(string _origin, double _PDT) {
         }
         tmpCurrentStop = tmpNewStop;
     }
-    //cout <<"C3"<<endl;
-    return "-101";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
